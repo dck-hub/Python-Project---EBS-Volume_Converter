@@ -11,11 +11,12 @@ def lambda_handler(event, context):
     
     volumn_arn = event['resources'][0]
     volumn_id  = get_volumn_id_from_arn(volumn_arn)
-    
+
+  # Initialize AWS ec2 client
     ec2_client = boto3.client("ec2")
     
     response = ec2_client.modify_volume(
-      # Get the volume ID and convert the EBS volume into 'gp3' volume type
+  # Get the volume ID and convert the EBS volume into 'gp3' volume type
         VolumeId = volumn_id,
         VolumeType = 'gp3'
     )
